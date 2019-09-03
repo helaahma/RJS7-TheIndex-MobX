@@ -9,8 +9,11 @@ class AuthorStore {
   authors = [];
 
   loading = true;
-
+  //use different loading for different functions for the program to distinguish and load properly
+  //in this file we fitch all authors and run author by id at the same time therefore the program won't distinguish
+  loadingAuthor = true;
   query = "";
+  author = null;
 
   fetchAuthors = async () => {
     try {
@@ -18,6 +21,17 @@ class AuthorStore {
       const authors = res.data;
       this.authors = authors;
       this.loading = false;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  //Review
+  fetchAuthorById = async id => {
+    try {
+      const res = await instance.get(`/api/authors/${id}`);
+      const author = res.data;
+      this.author = author;
+      this.loadingAuthor = false;
     } catch (err) {
       console.error(err);
     }
@@ -37,7 +51,9 @@ class AuthorStore {
 decorate(AuthorStore, {
   authors: observable,
   loading: observable,
+  loadingAuthor: observable,
   query: observable,
+  author: observable,
   filteredAuthors: computed
 });
 
