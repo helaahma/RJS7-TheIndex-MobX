@@ -10,12 +10,16 @@ import BookTable from "./BookTable";
 import bookStore from "./stores/bookStore";
 
 const BookList = props => {
-  const bookByColor = bookStore.color;
-  bookByColor = props.books.match.params.bookColor;
+  let bookByColor = bookStore.color;
+  bookByColor = props.match.params.bookColor;
   let books = bookStore.filterBooksByTitle;
+  console.log("BL", books);
+  console.log("BL2", bookStore.filterBooksByTitle);
 
   if (bookByColor) {
+    console.log("[BookList.js] BooksbyColor", bookByColor);
     books = bookStore.filterBooksByColor;
+    console.log("[BookList.js] Books' Color", books);
   }
 
   return bookStore.loading ? (

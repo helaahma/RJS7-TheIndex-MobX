@@ -3,9 +3,8 @@ import { observer } from "mobx-react";
 import BookRow from "./BookRow";
 
 function BookTable(props) {
-  const bookRows = props.books.map(book => (
-    <BookRow key={book.id} book={book} />
-  ));
+  console.log(props.books);
+  let bookRows = props.books.map(book => <BookRow key={book.id} book={book} />);
   return (
     <table className="mt-3 table">
       <thead>

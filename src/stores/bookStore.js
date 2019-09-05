@@ -17,14 +17,17 @@ class BookStore {
       const books = res.data;
       this.books = books;
       this.loading = false;
+      console.log("[bookStore.js] books: ", books);
     } catch (err) {
       console.error(err);
     }
   };
   get filterBooksByTitle() {
-    this.books.filter(book =>
-      `${book.title}`.toLowerCase().includes(this.query.toLowerCase())
-    );
+    console.log("[bookStore.js] filterBooksByTitle()");
+    return this.books.filter(book => {
+      console.log("[bookStore.js] filterBooksByTitle() book: ", book);
+      return `${book.title}`.toLowerCase().includes(this.query.toLowerCase());
+    });
   }
   get filterBooksByColor() {
     return this.filterBooksByTitle.filter(book => book.color === this.color);
@@ -49,4 +52,4 @@ decorate(BookStore, {
 const booksStore = new BookStore();
 booksStore.fetchBooks();
 
-export default BookStore;
+export default booksStore;

@@ -12,6 +12,7 @@ import BookStore from "./stores/bookStore";
 class AuthorDetail extends Component {
   componentDidMount() {
     authorStore.fetchAuthorById(this.props.match.params.authorID);
+    console.log("[AuthorDetail.js] BookStore: ", BookStore.getBookById);
   }
   //this checks the previuos ID with the current one if it is changed then fetchAuthorById (update)
   componentDidUpdate(prevProps) {
@@ -24,9 +25,9 @@ class AuthorDetail extends Component {
     if (authorStore.loadingAuthor) {
       return <Loading />;
     } else {
-      const author = authorStore.author;
+      let author = authorStore.author;
       const authorName = `${author.first_name} ${author.last_name}`;
-      const books = author.books.map(book => BookStore.getBookById(book.id));
+      let books = author.books.map(book => BookStore.getBookById(book.id));
       return (
         <div className="author">
           <div>

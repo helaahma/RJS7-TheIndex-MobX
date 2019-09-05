@@ -11,10 +11,11 @@ import BookList from "./BookList";
 
 // Store
 import authorStore from "./stores/authorStore";
+import booksStore from "./stores/bookStore";
 
 function App() {
   const getView = () => {
-    if (authorStore.loading) {
+    if (authorStore.loading && booksStore.loading) {
       return <Loading />;
     } else {
       return (
